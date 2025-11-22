@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: HireIT File Generator
+  version: "0.1.0"
+  description: |
+    Generates output files for HireIT AI (txt/csv/xlsx/pdf).
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /generate-file:
+    post:
+      operationId: generateFile
+      summary: Generate an output file from text
+      description: Writes text into a file and returns path or URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Content to write.
+                filename:
+                  type: string
+                  nullable: true
+                  description: Optional filename (without path).
+                ext:
+                  type: string
+                  default: txt
+                  description: File extension, e.g. txt, csv, xlsx, pdf.
+              required: [text]
+      responses:
+        "200":
+          description: File created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  filename:
+                    type: string
+                  local_path:
+                    type: string
+                    description: Local path for demo.
+                  url:
+                    type: string
+                    nullable: true
+                    description: Public URL if uploaded.
