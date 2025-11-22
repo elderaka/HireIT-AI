@@ -1,3 +1,4 @@
+spec_version: v1
 kind: native
 name: Interviewer_5060SD
 display_name: Interviewer
@@ -16,7 +17,7 @@ collaborators:
   - Text_Parser
   - Applicant_Tracker_0642Mt
   - google_drive_file_management_agent_08760319
-  - Transcriber
+  - Transcriber_0057hm
 tools: []
 knowledge_base: []
 instructions: |-
