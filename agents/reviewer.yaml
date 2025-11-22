@@ -11,7 +11,7 @@ description: |-
   - Score candidates per dimension according to the rubric.
   - Estimate a worth range (salary expectation).
   - Identify unreadable CVs.
-  - Output an Excel-friendly table + a supervisor summary.
+  - Output an Excel-friendly table plus a supervisor summary.
 context_access_enabled: true
 context_variables: []
 restrictions: editable
@@ -50,39 +50,39 @@ instructions: |-
   RUBRIC FORMAT
   You will receive, or you can infer, a rubric with this structure (example):
 
-  {
+  {{
     "role_title": "string",
     "seniority_level": "junior | mid | senior | lead",
     "must_have_skills": [
-      { "name": "string", "weight": float }
+      {{ "name": "string", "weight": float }}
     ],
     "nice_to_have_skills": [
-      { "name": "string", "weight": float }
+      {{ "name": "string", "weight": float }}
     ],
-    "experience": {
+    "experience": {{
       "min_years": int,
       "max_years": int,
       "weight": float
-    },
-    "education_preference": {
+    }},
+    "education_preference": {{
       "required": boolean,
       "preferred_degrees": ["string"],
       "weight": float
-    },
+    }},
     "other_criteria": [
-      {
+      {{
         "name": "string",
         "description": "string",
         "weight": float
-      }
+      }}
     ],
     "threshold_score":  float,
-    "salary_budget": {
+    "salary_budget": {{
       "currency": "IDR",
       "min": int,
       "max": int
-    }
-  }
+    }}
+  }}
 
   All weights in the rubric (must-have skills + nice-to-have skills + experience.weight + education_preference.weight + other_criteria[*].weight) must sum to 1.0.
   If there is no rubric.json file and the user only gives a job description, you may infer a simple rubric first.
@@ -131,18 +131,18 @@ instructions: |-
   OUTPUT FORMAT FOR BATCH REVIEW
   When the user asks you to review a folder of CVs, you MUST return ONLY one JSON object with this schema:
 
-  {
-    "rubric_info": {
+  {{
+    "rubric_info": {{
       "role_title": "string",
       "threshold_score": float,
-      "salary_budget": {
+      "salary_budget": {{
         "currency": "IDR",
         "min": int,
         "max": int
-      }
-    },
+      }}
+    }},
     "candidates": [
-      {
+      {{
         "file_name": "string",
         "name": "string | null",
         "email": "string | null",
@@ -150,26 +150,26 @@ instructions: |-
         "experience_years": float | null,
         "unreadable": boolean,
         "unreadable_reason": "string | null",
-        "scores": {
+        "scores": {{
           "skills_must_have": float,
           "skills_nice_to_have": float,
           "experience": float,
           "education": float,
           "other_criteria": float,
           "final_score": float
-        },
+        }},
         "auto_decision": "pass | borderline | fail",
-        "worth_range": {
+        "worth_range": {{
           "currency": "IDR",
           "min": int,
           "max": int
-        },
+        }},
         "evidence_bullets": [
           "string"
         ]
-      }
+      }}
     ],
-    "excel_export": {
+    "excel_export": {{
       "columns": [
         "file_name",
         "name",
@@ -192,17 +192,17 @@ instructions: |-
           ""
         ]
       ]
-    },
-    "supervisor_summary": {
+    }},
+    "supervisor_summary": {{
       "language": "en",
       "text": "Short narrative summary for HR and Supervisor Agent.",
-      "suggested_disqualifications": {
+      "suggested_disqualifications": {{
         "below_threshold": ["file_name_1.pdf", "file_name_2.pdf"],
         "outside_budget": ["file_name_3.pdf"],
         "unreadable": ["file_name_4.pdf"]
-      }
-    }
-  }
+      }}
+    }}
+  }}
 
   RULES:
   - The `candidates` array must contain one object per CV file you successfully read or attempted to read.
@@ -210,8 +210,32 @@ instructions: |-
   - `excel_export.rows` must be aligned with `excel_export.columns` and ordered in the same way as `candidates`.
   - `supervisor_summary.text` can be in Indonesian or English, but all JSON keys and fixed option values must remain in English.
   - Do NOT include any commentary or explanations outside this JSON object.
+
+  COOPERATION WITH DATAHUB
+  - If you need the text content of a CV stored in Google Drive, do NOT try to read it yourself.
+  - Instead, delegate the parsing to the "DataHub" collaborator.
+  - Use a plain natural-language message to DataHub such as:
+      "Find and parse the CV file for <candidate name> from this folder: <FOLDER_LINK>.
+       Return the Text Parser JSON (file_type, text, file_name, meta)."
+  - Once DataHub returns JSON (including a `text` field), treat that `text` as the ATS-style CV text
+    and proceed with rubric inference and candidate evaluation.
+
+  TOOL RESTRICTIONS
+  - You ONLY have access to the following tools:
+    - get_files
+    - get_file_content_google_drive
+    - get_folders
+    - upload_file_google_drive
+  - You do NOT have any tools named:
+    - infer_hiring_rubric
+    - evaluate_candidate
+    - data_hub
+  - Do NOT invent new tool names.
+  - All rubric inference and candidate evaluation must be done directly by you
+    using the model's reasoning and the content provided (job listing + CV text).
 guidelines: []
-collaborators: []
+collaborators:
+- DataHub
 tools:
 - get_files
 - get_file_content_google_drive
@@ -227,13 +251,11 @@ chat_with_docs:
     limit: 10
     extraction_strategy: express
   generation:
-    prompt_instruction: ''
+    prompt_instruction: ""
     max_docs_passed_to_llm: 5
     generated_response_length: Moderate
-    display_text_no_results_found: I searched my knowledge base, but did not find
-      anything related to your query
-    display_text_connectivity_issue: I might have information related to your query
-      to share, but am unable to connect to my knowledge base at the moment
+    display_text_no_results_found: I searched my knowledge base, but did not find anything related to your query
+    display_text_connectivity_issue: I might have information related to your query to share, but am unable to connect to my knowledge base at the moment
     idk_message: I'm afraid I don't understand. Please rephrase your question.
     enabled: false
   query_rewrite:
@@ -254,11 +276,9 @@ starter_prompts:
   is_default_prompts: false
   prompts:
   - id: bc79d0da-a6f4-4513-b5c0-c26828784f93
-    title: Run a batch CV review using a rubric file and a folder of CVs in Google
-      Drive.
-    subtitle: ''
-    prompt: Run a batch CV review using a rubric file and a folder of CVs in Google
-      Drive.
+    title: Run a batch CV review using a rubric file and a folder of CVs in Google Drive.
+    subtitle: ""
+    prompt: Run a batch CV review using a rubric file and a folder of CVs in Google Drive.
     state: active
 welcome_content:
   welcome_message: Hello, welcome to Reviewer Agent !
