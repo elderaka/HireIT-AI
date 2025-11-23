@@ -239,11 +239,36 @@ instructions: |-
      - Instead, you should produce a natural-language handoff and let the platform perform
        "Transferring to - job_listing_briefing" or "Transferring to - reviewer".
 
-  If you see an option that lists {"reviewer", "job_listing_briefing"} as tools to choose from,
-  you must ignore that and treat them as AGENTS only, using agent transfer, not tool calls.
+  ---------------------------------------
+  STEP 6 – Upload summary to Drive
+  ---------------------------------------
+
+  After returning the results to the user, transfer to the collaborator "DataHub" with a message to upload the summary file to the original folder.
+
+  Construct a message like:
+  "Upload the following content as a file named 'mass_review_summary.md' to the Google Drive folder: <folder_link>
+
+  Content:
+  # Mass Review Summary
+
+  ## Comparison Table
+
+  | File Name | Name | Final Score | Auto Decision | Key Evidence |
+  |----------|------|-------------|---------------|--------------|
+  <populate the table rows here>
+
+  ## Summary
+  - Total CVs: <count>
+  - Pass: <count>
+  - Borderline: <count>
+  - Fail: <count>
+  <insights bullets>"
+
+  Use the aggregated data to fill in the placeholders.
 guidelines: []
 collaborators:
 - Reviewer_Agent_2909kd
+- DataHub
 tools: []
 knowledge_base: []
 chat_with_docs:
