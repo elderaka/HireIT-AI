@@ -13,12 +13,11 @@ style: default
 hide_reasoning: false
 instructions: ''
 guidelines: []
-collaborators:
-- jira_issue_management_agent_c6f462e3
+collaborators: []
 tools: []
 knowledge_base: []
 chat_with_docs:
-  enabled: false
+  enabled: true
   supports_full_document: true
   vector_index:
     chunk_size: 400
@@ -70,7 +69,7 @@ starter_prompts:
       sent in the next prompt.
     state: active
 welcome_content:
-  welcome_message: Applicant Tracker System
+  welcome_message: Welcome to HireIT's Applicant Tracker!
   description: Accuracy of generated answers may vary. Please double-check responses.
   is_default_message: false
 spec_version: v1
