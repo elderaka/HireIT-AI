@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: CV Parser Tool
+  description: Parse CVs from Google Drive folder for review
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /parse-cvs:
+    post:
+      operationId: parse_cvs_from_folder
+      summary: Parse CV files from a Google Drive folder
+      description: |
+        Extracts text from PDF CVs in a Drive folder. 
+        Optionally filters by candidate name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - folder_id
+              properties:
+                folder_id:
+                  type: string
+                  description: Google Drive folder ID containing CV PDFs
+                candidate_name:
+                  type: string
+                  description: Optional - filter CVs by candidate name
+      responses:
+        '200':
+          description: Successfully parsed CVs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cvs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        file_name:
+                          type: string
+                        candidate_name:
+                          type: string
+                        cv_text:
+                          type: string
+                        file_id:
+                          type: string
+                  total_found:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      type: string
+  
+  /get-job-listing:
+    post:
+      operationId: get_job_listing_from_folder
+      summary: Get job listing from Drive folder
+      description: |
+        Retrieves job-listing.txt or job_intake.json from a folder.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - folder_id
+              properties:
+                folder_id:
+                  type: string
+                  description: Google Drive folder ID
+      responses:
+        '200':
+          description: Job listing retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_listing:
+                    type: string
+                  file_name:
+                    type: string
+                  found:
+                    type: boolean
+                  error:
+                    type: string

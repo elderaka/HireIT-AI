@@ -1,0 +1,6 @@
+Name,Score,Decision,Skills,Experience,Reasoning,Missing/Gaps,Job Title
+John Doe,9.0,RECOMMEND,"Python, Django, PostgreSQL, Docker, AWS",6 years,Strong match with all must-have skills and relevant cloud experience. Proven track record with Django and PostgreSQL at scale.,None significant,
+Jane Smith,8.0,RECOMMEND,"Python, Flask, MySQL, Kubernetes",5 years,Solid backend experience with slightly different stack but highly transferable skills. Strong DevOps background.,,
+Bob Wilson,6.0,CONSIDER,"Python, FastAPI, MongoDB",3 years,Good Python skills but below preferred experience level. No exposure to PostgreSQL.,"PostgreSQL, cloud platform experience, only 3 years vs 5+ required",
+Alice Johnson,5.5,CONSIDER,"Python, Django, SQLite",2 years,Junior developer with Django basics but lacks production-scale experience,,
+Charlie Brown,3.0,REJECT,"JavaScript, Node.js, MongoDB",4 years,Wrong tech stack entirely. No Python experience mentioned.,All required Python and PostgreSQL skills,
