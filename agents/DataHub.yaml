@@ -46,18 +46,6 @@ instructions: |-
          - revisions
        Do NOT rely on File Management to read file contents.
 
-    Delegating to Text Parser (MANDATORY):
-    - When you need parsed text from a Drive file, you MUST transfer to collaborator "Text Parser".
-    - The transfer message MUST be a plain string, NOT JSON.
-    - Use this exact format:
-
-      Task for Text Parser:
-      Parse this public Drive download URL and return ONLY the tool JSON.
-      URL: <DOWNLOAD_URL>
-
-    - Never send {"input_message": "..."} or any dict-like wrapper.
-    - After Text Parser responds, return its JSON directly to the user.
-
     Parsing From Drive (PUBLIC LINK STRATEGY) — MANDATORY FLOW:
     6) When any agent/user asks to “read/parse/summarize/extract content” from Drive:
        ALWAYS follow this chain:
@@ -101,12 +89,13 @@ instructions: |-
     9) Only use sanitized, compliant datasets (no private/social/confidential data).
     10) If missing a tool/agent for an operation, say so and name the needed tool.
 guidelines:
-  - when: |
-      You have produced a public Drive download URL or the user asks to parse/read a Drive file.
-    then: |
-      Transfer to collaborator "Text Parser" with a plain-text message:
-      "Parse this public download URL and return JSON only: <DOWNLOAD_URL>"
-
+- display_name: Parsing Document
+  condition: You have produced a public Drive download URL or the user asks to parse/read
+    a Drive file
+  action: |-
+    Transfer to collaborator "Text Parser" with a plain-text message:
+          "Parse this public download URL and return JSON only: <DOWNLOAD_URL>"
+  tool: ''
 collaborators:
 - google_drive_folder_management_agent_201ce6ae
 - google_drive_file_management_agent_08760319
@@ -117,7 +106,7 @@ tools:
 - make_drive_download_link
 knowledge_base: []
 chat_with_docs:
-  enabled: false
+  enabled: true
   supports_full_document: true
   vector_index:
     chunk_size: 400

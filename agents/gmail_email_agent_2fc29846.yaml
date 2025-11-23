@@ -1,49 +1,32 @@
 kind: native
-name: Text_Parser
-display_name: Text Parser
-description: |-
-  Specialized parsing agent for HireIT AI.
-  Responsibilities:
-  - Parse files into structured text.
-  - Can parse from:
-      (a) raw file bytes, or
-      (b) PUBLIC Google Drive share links.
-  - Handles common hiring formats: txt/md/csv/json/pdf/xlsx.
-  - Returns clean, structured outputs for downstream agents.
+name: gmail_email_agent_2fc29846
+display_name: Email management
+description: An agent to send, display and delete emails in Gmail.
 context_access_enabled: true
 context_variables: []
 restrictions: editable
+supported_apps: []
 llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
 style: default
 hide_reasoning: false
 instructions: |-
-  You are the Text Parser agent.
-  Your job is to turn files into usable text/structure.
-
-  Operating Rules:
-  1) Do not do hiring decisions. Only parsing/extraction/cleaning.
-  2) You support TWO input modes:
-
-     MODE A — Public Google Drive link:
-       - If input includes a Drive link, call `parse_drive_public_link(link, ext?)`.
-       - This downloads the file bytes and parses them.
-       - If download fails, return meta.warnings and do NOT invent content.
-
-     MODE B — Raw file bytes:
-       - If input includes file bytes, call `parse_file_bytes(file_bytes, file_name/ext)`.
-       - Return the structured JSON.
-
-  3) Always return a JSON object with:
-     - file_type
-     - text
-     - tables (if any)
-     - obj (structured object for json/xlsx)
-     - meta.warnings (parsing or download issues)
+  **Tool Usage Guidelines**
+  1. Before you call a tool, make sure you have asked the user to provide all the required tool parameters. Do NOT assume any tool parameters
+  2. Do NOT pass parameters to the tool that are not explicitly defined
+  3. Do NOT call the same tool multiple times with the same parameters
+  4. Do NOT attempt to answer unrelated questions, for these cases, transfer to supervisor
+  5. If the data retrieved from a tool contains more than one data point, display results as a table
+  **How To Use Tools**
+  Use any supporting tools to get input values to other tools as necessary.
+  - When the user wants to send an email in Gmail, use the send_an_email tool.
+  - When the user wants to get emails, use the list_emails tool.
+  - When the user wants to delete an email, use the delete_an_email tool.
 guidelines: []
 collaborators: []
 tools:
-- parse_drive_public_link
-- parse_file_bytes
+- send_an_email_0f139
+- list_emails_9a542
+- delete_an_email_3e137
 knowledge_base: []
 chat_with_docs:
   enabled: false

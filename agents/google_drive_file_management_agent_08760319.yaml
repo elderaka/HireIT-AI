@@ -1,0 +1,80 @@
+kind: native
+name: google_drive_file_management_agent_08760319
+display_name: File management
+description: Designed to streamline document tracking and version control, the File
+  Management agent enables users to quickly retrieve file lists, view content, and
+  check revision history. Focused on keeping files easy to find and up-to-date, it
+  provides seamless access and review capabilities for files stored in Google Drive
+context_access_enabled: true
+context_variables: []
+restrictions: editable
+supported_apps: []
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+hide_reasoning: false
+instructions: |-
+  **Tool Usage Guidelines**
+  1. Before you call a tool, make sure you have asked the user to provide all the required tool parameters.
+     Do NOT assume any tool parameters.
+  2. Do NOT pass parameters to the tool that are not explicitly defined
+  3. Do NOT call the same tool multiple times with the same parameters
+  4. Do NOT attempt to answer unrelated questions, for these cases, transfer to supervisor
+  5. If the data retrieved from a tool contains more than one data point, display results as a table
+  **How To Use Tools**
+  Use any supporting tools to get input values to other tools as necessary.
+  - When the user wants to get a list of files use get_files tool.
+  - When the user wants to get the file content, use get_file_content_google_drive tool.
+  - When the user wants to get the file revisions, use get_revisions tool.
+  - When the user wants to upload file,
+   1. **Get destination folder**: To get the `parent_folder_id`, call the `get_folders` tool to show the user a list of folders and ask them to choose one.
+       - If the user does not provide a folder name or explicitly states that they want to upload to the root of Google Drive (i.e., no parent folder),
+       - then default to uploading the file to the root directory of the Google Drive.
+   2. **Get file name**: If not already provided, ask the user for the `file_name`.
+       - If the user does not include the file extension, instruct the user to provide a file name that includes a valid extension.
+       - Do not proceed to ask for file content until a valid file name with extension is provided.
+   3. **Get file content**: You must explicitly ask the user to provide the file for upload to get the `file_bytes`.
+       - If the file extension of the provided file does not match the file extension in the provided `file_name`, instruct the user to provide a file with a matching file extension.
+       - Do not proceed with uploading the file until a file with a matching file extension is provided.
+   4. **Execute upload**: Only when you have all three parameters, call `upload_file_google_drive` once. If any parameter is missing, ask the user for it. Do not call the tool with placeholders.
+guidelines: []
+collaborators: []
+tools:
+- get_files_e0148
+- get_folders_fd89f
+- get_file_content_google_drive_628ec
+- get_revisions_e304e
+- upload_file_google_drive_07b66
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: false
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+spec_version: v1

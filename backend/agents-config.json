@@ -1,0 +1,23 @@
+{
+  "agents": [
+    {
+      "id": "ask_orchestrate",
+      "name": "AskOrchestrate",
+      "agentId": "11efeaae-3f0d-4d48-9d5f-a761ccdc4ed1",
+      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
+      "description": "General purpose AI assistant that can help with various tasks and answer questions.",
+      "icon": "🤖",
+      "color": "#0f62fe"
+    },
+    {
+      "id": "interviewer",
+      "name": "Interviewer",
+      "agentId": "11efeaae-3f0d-4d48-9d5f-a761ccdc4ed1",
+      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
+      "description": "Specialized interviewing agent for HireIT AI. Consumes interview transcripts, scores candidates, and generates summaries.",
+      "icon": "🎤",
+      "color": "#24a148"
+    }
+  ],
+  "comment": "Add more agents here as you deploy them. Get agent IDs from watsonx Orchestrate UI > Agents > Channels > Embedded agent"
+}

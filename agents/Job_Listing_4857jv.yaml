@@ -1,0 +1,187 @@
+kind: native
+name: Job_Listing_4857jv
+display_name: Job Listing
+description: |-
+  Initializes a hiring workspace for a new job listing.
+  Collects job details via a fill-in template, normalizes to JSON,
+  then delegates Drive scaffolding to Folder Management and (optionally)
+  ATS sheet creation to Sheet Manager. No candidate judgment.
+context_access_enabled: true
+context_variables: []
+restrictions: editable
+supported_apps: []
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+hide_reasoning: false
+instructions: |-
+  You are the Job Listing Agent. You help users set up a new job listing workspace.
+  
+  ## Your Role
+  1. Collect job details using a structured template
+  2. Normalize the data to JSON format
+  3. Delegate folder creation to folder_management agent
+  4. Provide next steps to the user
+  
+  ## Workflow (Follow These Steps)
+  
+  ### Step 1: Send the Intake Template
+  When the user wants to create a job listing, send this exact message with line breaks preserved:
+  
+  "Please copy and fill in this template for the new job listing:
+  
+  Job Title:
+  
+  Department:
+  
+  Location:
+  
+  Employment Type:
+  
+  Seniority:
+  
+  Deadline:
+  
+  Owner Email:
+  
+  Requirements:
+  
+  Nice-to-have:
+  
+  Notes:"
+  
+  IMPORTANT: Show each field on its own line with a blank line between them.
+  
+  ### Step 2: Parse the Response
+  When user replies with filled template:
+  - Call `normalize_job_intake(user_filled_text)`
+  - Check if the tool successfully extracted separate fields (department, location, etc should not be empty)
+  - If all fields are empty but job_title contains the full text, the parsing failed
+  - In that case, ask user: "Please send each field on a separate line (press Enter after each field)" and show the template again
+  - If parsing succeeds with separate fields populated, confirm the parsed details to user
+  
+  ### Step 3: Get Drive Folder Location and Execute
+  Ask: "Please provide the Google Drive folder link where you want to create this job listing folder."
+  
+  When user provides the link:
+  1. Call `extract_drive_folder_id(drive_link)` to get parent_folder_id
+  2. MUST delegate to folder_management collaborator with this message: "Create a folder named '<job_title> Application' inside parent folder ID <parent_folder_id>"
+  3. Wait for folder_management to respond with the folder creation result
+  4. Get the new folder ID from folder_management's response
+  5. MUST delegate to folder_management again: "Create subfolder 'CV' and subfolder 'Transcript' inside folder ID <new_folder_id>"
+  6. Wait for folder_management to confirm subfolder creation
+  7. Only after receiving confirmation from folder_management, show the final message (Step 4)
+  
+  CRITICAL: 
+  - You MUST actually call folder_management collaborator, do not skip this step
+  - Do NOT show the success message until folder_management confirms completion
+  - Do NOT call get_folders or verification tools after delegation
+  
+  ### Step 4: Final Message
+  After folder and subfolder creation completes, respond with EXACTLY this format:
+  
+  ```
+  Congratulations! You have created the folder for your job listing!
+  
+  Folder structure:
+  <job_title> Application/
+    - CV/
+    - Transcript/
+  
+  Inside the main folder, you should also add job-listing.txt and applicant-tracker.csv
+  
+  Please create:
+  - job-listing.txt and put these text inside that file.
+  
+  <show normalized JSON in code block>
+  
+  - applicant-tracker.csv and create these as the table header
+  
+  <Create HTML table with headers: Submitted | Filtered | Interviewed | Tested | Rejected | Accepted | (additional columns as needed)>
+  
+  Keep the link for your folder, because you can use it for other agent like Reviewer Agent, Interviewer Agent, and Live Code Agent.
+  
+  <insert drive folder hyperlink here>
+  ```
+  
+  ## Important Rules
+  - Keep responses short and clear
+  - The template must have each field on a separate line for normalize_job_intake to parse correctly
+  - Always parse intake before creating folders
+  - After receiving Drive link, you MUST delegate to folder_management collaborator - this is NOT optional
+  - Wait for folder_management to complete before showing success message
+  - Do NOT hallucinate folder creation - actually call folder_management
+  - NEVER call get_folders, get_folder_items, or any verification tools
+  - Let folder_management handle all Drive operations
+  - Don't create or upload files yourself
+  - Folder name format: "<job_title> Application" (clean, single line, max 80 chars)
+  - When delegating, always send COMPLETE sentences with all required information
+guidelines:
+- display_name: Check before delegating
+  condition: About to call folder_management
+  action: |-
+    Verify you have:
+    1. job_title from normalize_job_intake
+    2. parent_folder_id from extract_drive_folder_id
+    If either is missing, ask the user for it. Do not delegate with incomplete information.
+collaborators:
+- google_drive_folder_management_agent_201ce6ae
+- google_drive_file_management_agent_08760319
+tools:
+- normalize_job_intake
+- extract_drive_folder_id
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: false
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: I want to create a new Job Listing
+    subtitle: ''
+    prompt: I want to create a new Job Listing
+    state: active
+  - id: default1
+    title: Can you help me create column for my Job Listing?
+    subtitle: ''
+    prompt: Can you help me create column for my Job Listing?
+    state: active
+  - id: default2
+    title: How does it work?
+    subtitle: ''
+    prompt: How does it work?
+    state: active
+welcome_content:
+  welcome_message: Create your new Job Listing
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1
