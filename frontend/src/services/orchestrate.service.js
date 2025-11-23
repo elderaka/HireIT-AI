@@ -3,7 +3,7 @@
  * Wrapper for calling Orchestrate API endpoints through backend
  */
 
-const API_BASE_URL = 'http://localhost:3001/api/orchestrate';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/orchestrate`;
 
 /**
  * Get all available agents from Orchestrate
