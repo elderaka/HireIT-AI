@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: CV Review Export Tool
+  description: Export CV review results to CSV from agent responses
+  version: 2.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /export-review-csv:
+    post:
+      operationId: create_review_summary_from_text
+      summary: Parse agent response and export to CSV
+      description: |
+        Takes the full text response from Reviewer or Mass_Review agent,
+        extracts candidate data, and creates a CSV summary file.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - agent_response_text
+              properties:
+                agent_response_text:
+                  type: string
+                  description: Full text response from the review agent
+                output_csv_path:
+                  type: string
+                  description: Optional path for output CSV (default review_summary.csv)
+                  default: review_summary.csv
+      responses:
+        '200':
+          description: CSV created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  csv_path:
+                    type: string
+                    description: Absolute path to created CSV file
+                  total_candidates:
+                    type: integer
+                  recommended:
+                    type: integer
+                  consider:
+                    type: integer
+                  reject:
+                    type: integer
+                  candidates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        final_score:
+                          type: number
+                        auto_decision:
+                          type: string
+                        skills:
+                          type: string
+                        experience:
+                          type: string
+                        reasoning:
+                          type: string
+                        missing:
+                          type: string
+  
+  /export-structured-review:
+    post:
+      operationId: export_review_summary_to_csv
+      summary: Export structured review data to CSV
+      description: |
+        Takes pre-structured candidate data and exports to CSV.
+        Use this if you already have parsed candidate objects.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - agent_response
+              properties:
+                agent_response:
+                  description: Either text string or array of candidate objects
+                  oneOf:
+                    - type: string
+                    - type: array
+                      items:
+                        type: object
+                output_path:
+                  type: string
+                  default: review_summary.csv
+                job_title:
+                  type: string
+                  description: Optional job title to include
+      responses:
+        '200':
+          description: CSV created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  csv_path:
+                    type: string
