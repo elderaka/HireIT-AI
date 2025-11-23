@@ -1,0 +1,7 @@
+Name,Email,Phone,Submitted,Filtered,Interviewed,Tested,Status,Notes
+John Doe,john.doe@email.com,+1-555-0101,2025-11-01,2025-11-05,2025-11-12,2025-11-15,Accepted,"Excellent candidate, strong technical skills, great cultural fit"
+Jane Smith,jane.smith@email.com,+1-555-0102,2025-11-02,2025-11-06,2025-11-13,,Pending,"Borderline candidate, awaiting second interview decision"
+Michael Chen,michael.chen@email.com,+1-555-0103,2025-10-28,2025-11-02,2025-11-10,2025-11-14,Accepted,"Outstanding candidate, PhD level, would be great for senior role"
+Sarah Wilson,sarah.wilson@email.com,+1-555-0104,2025-11-03,2025-11-07,,,Rejected,Insufficient experience for mid-level position
+David Garcia,david.garcia@email.com,+1-555-0105,2025-11-04,2025-11-08,2025-11-16,,Pending,"Good candidate, scheduling technical assessment"
+Emily Rodriguez,emily.rodriguez@email.com,+1-555-0106,2025-11-05,,,,Pending,"New application, CV review pending"

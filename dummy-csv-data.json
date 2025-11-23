@@ -1,0 +1,443 @@
+{
+  "description": "Dummy data for testing CSV conversion functions in HireIT-AI",
+  "generated": "2025-11-23",
+  
+  "cv_review_candidates": [
+    {
+      "file_name": "john_doe_cv.pdf",
+      "name": "John Doe",
+      "email": "john.doe@email.com",
+      "phone": "+1-555-0101",
+      "experience_years": 5,
+      "scores": {
+        "must_have_skills": 9.0,
+        "nice_to_have_skills": 7.5,
+        "experience": 8.5,
+        "education": 9.0,
+        "other_criteria": 8.0,
+        "final_score": 8.4
+      },
+      "auto_decision": "pass",
+      "worth_range": {
+        "currency": "USD",
+        "min": 85000,
+        "max": 105000
+      },
+      "evidence_bullets": [
+        "5+ years of Python backend development experience",
+        "Strong AWS cloud architecture skills with 3 certifications",
+        "Led team of 4 developers on microservices project",
+        "Masters in Computer Science from MIT",
+        "Excellent problem-solving demonstrated in technical assessment"
+      ],
+      "unreadable": false,
+      "unreadable_reason": ""
+    },
+    {
+      "file_name": "jane_smith_cv.pdf",
+      "name": "Jane Smith",
+      "email": "jane.smith@email.com",
+      "phone": "+1-555-0102",
+      "experience_years": 3.5,
+      "scores": {
+        "must_have_skills": 7.5,
+        "nice_to_have_skills": 6.0,
+        "experience": 6.5,
+        "education": 8.0,
+        "other_criteria": 7.0,
+        "final_score": 7.0
+      },
+      "auto_decision": "borderline",
+      "worth_range": {
+        "currency": "USD",
+        "min": 70000,
+        "max": 85000
+      },
+      "evidence_bullets": [
+        "3.5 years of full-stack development experience",
+        "Bachelor's degree in Software Engineering",
+        "Good understanding of React and Node.js",
+        "Missing experience with Docker and Kubernetes",
+        "Strong communication skills in interviews"
+      ],
+      "unreadable": false,
+      "unreadable_reason": ""
+    },
+    {
+      "file_name": "michael_chen_cv.pdf",
+      "name": "Michael Chen",
+      "email": "michael.chen@email.com",
+      "phone": "+1-555-0103",
+      "experience_years": 8,
+      "scores": {
+        "must_have_skills": 9.5,
+        "nice_to_have_skills": 9.0,
+        "experience": 9.5,
+        "education": 9.0,
+        "other_criteria": 9.0,
+        "final_score": 9.2
+      },
+      "auto_decision": "pass",
+      "worth_range": {
+        "currency": "USD",
+        "min": 110000,
+        "max": 135000
+      },
+      "evidence_bullets": [
+        "8 years of senior backend engineering experience",
+        "Expert in Python, Go, and Java with production systems",
+        "Ph.D. in Computer Science from Stanford",
+        "Published 5 papers on distributed systems",
+        "Previously Tech Lead at major tech company",
+        "All nice-to-have skills present (GraphQL, Redis, gRPC)"
+      ],
+      "unreadable": false,
+      "unreadable_reason": ""
+    },
+    {
+      "file_name": "sarah_wilson_cv.pdf",
+      "name": "Sarah Wilson",
+      "email": "sarah.wilson@email.com",
+      "phone": "+1-555-0104",
+      "experience_years": 2,
+      "scores": {
+        "must_have_skills": 5.5,
+        "nice_to_have_skills": 4.0,
+        "experience": 5.0,
+        "education": 7.0,
+        "other_criteria": 5.5,
+        "final_score": 5.4
+      },
+      "auto_decision": "fail",
+      "worth_range": {
+        "currency": "USD",
+        "min": 55000,
+        "max": 70000
+      },
+      "evidence_bullets": [
+        "Only 2 years of experience, below minimum requirement",
+        "Bachelor's degree in Computer Science",
+        "Limited exposure to required backend frameworks",
+        "No cloud platform experience mentioned",
+        "Junior-level skills, not suitable for mid-level role"
+      ],
+      "unreadable": false,
+      "unreadable_reason": ""
+    },
+    {
+      "file_name": "corrupted_file_123.pdf",
+      "name": null,
+      "email": null,
+      "phone": null,
+      "experience_years": null,
+      "scores": {
+        "must_have_skills": 0.0,
+        "nice_to_have_skills": 0.0,
+        "experience": 0.0,
+        "education": 0.0,
+        "other_criteria": 0.0,
+        "final_score": 0.0
+      },
+      "auto_decision": "fail",
+      "worth_range": {
+        "currency": "USD",
+        "min": 0,
+        "max": 0
+      },
+      "evidence_bullets": [
+        "File could not be parsed - corrupted or unsupported format"
+      ],
+      "unreadable": true,
+      "unreadable_reason": "PDF parsing error: File appears to be corrupted or encrypted"
+    },
+    {
+      "file_name": "david_garcia_cv.pdf",
+      "name": "David Garcia",
+      "email": "david.garcia@email.com",
+      "phone": "+1-555-0105",
+      "experience_years": 6,
+      "scores": {
+        "must_have_skills": 8.0,
+        "nice_to_have_skills": 7.0,
+        "experience": 8.0,
+        "education": 7.5,
+        "other_criteria": 7.5,
+        "final_score": 7.6
+      },
+      "auto_decision": "pass",
+      "worth_range": {
+        "currency": "USD",
+        "min": 80000,
+        "max": 95000
+      },
+      "evidence_bullets": [
+        "6 years of backend development with Python and Django",
+        "Strong database design skills (PostgreSQL, MongoDB)",
+        "Bachelor's degree with relevant bootcamp certification",
+        "Good API design and RESTful principles",
+        "Team player with positive references"
+      ],
+      "unreadable": false,
+      "unreadable_reason": ""
+    }
+  ],
+
+  "rubric_info": {
+    "role_title": "Mid-Level Backend Engineer",
+    "department": "Engineering",
+    "threshold_score": 6.5,
+    "salary_budget": {
+      "currency": "USD",
+      "min": 75000,
+      "max": 100000
+    },
+    "requirements": {
+      "must_have_skills": [
+        "Python",
+        "REST API development",
+        "SQL databases",
+        "Git version control",
+        "Unit testing"
+      ],
+      "nice_to_have_skills": [
+        "Docker",
+        "Kubernetes",
+        "AWS or cloud platforms",
+        "GraphQL",
+        "Redis",
+        "Microservices architecture"
+      ],
+      "min_experience_years": 3,
+      "max_experience_years": 7,
+      "education_preference": "Bachelor's degree in Computer Science or related field"
+    },
+    "weights": {
+      "must_have_skills": 0.40,
+      "nice_to_have_skills": 0.15,
+      "experience": 0.25,
+      "education": 0.10,
+      "other_criteria": 0.10
+    }
+  },
+
+  "applicant_tracker_data": [
+    {
+      "Name": "John Doe",
+      "Email": "john.doe@email.com",
+      "Phone": "+1-555-0101",
+      "Submitted": "2025-11-01",
+      "Filtered": "2025-11-05",
+      "Interviewed": "2025-11-12",
+      "Tested": "2025-11-15",
+      "Status": "Accepted",
+      "Notes": "Excellent candidate, strong technical skills, great cultural fit"
+    },
+    {
+      "Name": "Jane Smith",
+      "Email": "jane.smith@email.com",
+      "Phone": "+1-555-0102",
+      "Submitted": "2025-11-02",
+      "Filtered": "2025-11-06",
+      "Interviewed": "2025-11-13",
+      "Tested": "",
+      "Status": "Pending",
+      "Notes": "Borderline candidate, awaiting second interview decision"
+    },
+    {
+      "Name": "Michael Chen",
+      "Email": "michael.chen@email.com",
+      "Phone": "+1-555-0103",
+      "Submitted": "2025-10-28",
+      "Filtered": "2025-11-02",
+      "Interviewed": "2025-11-10",
+      "Tested": "2025-11-14",
+      "Status": "Accepted",
+      "Notes": "Outstanding candidate, PhD level, would be great for senior role"
+    },
+    {
+      "Name": "Sarah Wilson",
+      "Email": "sarah.wilson@email.com",
+      "Phone": "+1-555-0104",
+      "Submitted": "2025-11-03",
+      "Filtered": "2025-11-07",
+      "Interviewed": "",
+      "Tested": "",
+      "Status": "Rejected",
+      "Notes": "Insufficient experience for mid-level position"
+    },
+    {
+      "Name": "David Garcia",
+      "Email": "david.garcia@email.com",
+      "Phone": "+1-555-0105",
+      "Submitted": "2025-11-04",
+      "Filtered": "2025-11-08",
+      "Interviewed": "2025-11-16",
+      "Tested": "",
+      "Status": "Pending",
+      "Notes": "Good candidate, scheduling technical assessment"
+    },
+    {
+      "Name": "Emily Rodriguez",
+      "Email": "emily.rodriguez@email.com",
+      "Phone": "+1-555-0106",
+      "Submitted": "2025-11-05",
+      "Filtered": "",
+      "Interviewed": "",
+      "Tested": "",
+      "Status": "Pending",
+      "Notes": "New application, CV review pending"
+    }
+  ],
+
+  "interview_transcripts": [
+    {
+      "candidate_id": "john_doe_001",
+      "candidate_name": "John Doe",
+      "interview_date": "2025-11-12",
+      "interviewer": "Alice Manager",
+      "duration_minutes": 45,
+      "transcript": [
+        {
+          "speaker": "Interviewer",
+          "timestamp": "00:00",
+          "text": "Hi John, thanks for joining us today. Can you start by telling us about your current role?"
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "00:15",
+          "text": "Sure! I'm currently a Backend Engineer at TechCorp, where I've been for the past 3 years. I work primarily with Python and Django, building microservices for our e-commerce platform."
+        },
+        {
+          "speaker": "Interviewer",
+          "timestamp": "00:45",
+          "text": "That sounds great. Can you describe a challenging technical problem you've solved recently?"
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "01:00",
+          "text": "Absolutely. We had a performance issue with our payment processing service. Transactions were taking 5-10 seconds, which was causing customer complaints. I analyzed the bottleneck and found it was in our database queries. I implemented query optimization, added Redis caching for frequently accessed data, and restructured our API calls. We reduced response time to under 500ms."
+        },
+        {
+          "speaker": "Interviewer",
+          "timestamp": "02:15",
+          "text": "Impressive! How do you approach code reviews and collaboration with your team?"
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "02:30",
+          "text": "I believe in constructive feedback. I always look for learning opportunities in reviews - both giving and receiving feedback. I focus on code maintainability, test coverage, and adherence to our coding standards. I also mentor junior developers and conduct weekly knowledge-sharing sessions."
+        }
+      ],
+      "assessment": {
+        "technical_score": 9.0,
+        "communication_score": 8.5,
+        "cultural_fit_score": 9.0,
+        "problem_solving_score": 8.5,
+        "final_score": 8.75,
+        "recommendation": "Strong Hire",
+        "subjective_summary": "John demonstrated excellent technical knowledge and problem-solving skills. His approach to the payment processing optimization showed systematic thinking and practical expertise. Communication was clear and professional. He seems genuinely passionate about mentoring and team growth.",
+        "objective_summary": "Candidate has 5 years experience with strong Python/Django background. Successfully solved critical production issues. CV score of 8.4 combined with interview performance of 8.75 gives overall rating of 8.6. Highly recommended for mid-level backend role."
+      }
+    },
+    {
+      "candidate_id": "jane_smith_002",
+      "candidate_name": "Jane Smith",
+      "interview_date": "2025-11-13",
+      "interviewer": "Bob Tech Lead",
+      "duration_minutes": 40,
+      "transcript": [
+        {
+          "speaker": "Interviewer",
+          "timestamp": "00:00",
+          "text": "Hi Jane, welcome! Tell me about your experience with backend development."
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "00:10",
+          "text": "Hi! I've been working as a full-stack developer for about 3 and a half years. I mainly work with Node.js and Express on the backend, and React on the frontend. I've built several REST APIs and worked with MongoDB."
+        },
+        {
+          "speaker": "Interviewer",
+          "timestamp": "00:40",
+          "text": "Good. Have you worked with Python before?"
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "00:50",
+          "text": "I've done some Python scripting and took a course on it, but I haven't used it in production. I'm confident I can pick it up quickly though, since I'm already familiar with backend concepts."
+        },
+        {
+          "speaker": "Interviewer",
+          "timestamp": "01:15",
+          "text": "What about containerization and deployment? Any experience with Docker or Kubernetes?"
+        },
+        {
+          "speaker": "Interviewee",
+          "timestamp": "01:25",
+          "text": "Um, I've heard of Docker but haven't used it hands-on. We have a DevOps team that handles deployments at my current company. I mostly focus on the application code."
+        }
+      ],
+      "assessment": {
+        "technical_score": 6.5,
+        "communication_score": 7.0,
+        "cultural_fit_score": 7.5,
+        "problem_solving_score": 6.0,
+        "final_score": 6.75,
+        "recommendation": "Maybe - Second Interview",
+        "subjective_summary": "Jane has decent full-stack experience but lacks hands-on Python production experience and infrastructure knowledge. She seems eager to learn and has good communication skills. Would benefit from a technical assessment to gauge learning ability.",
+        "objective_summary": "3.5 years experience, primarily Node.js/React. CV score of 7.0 with interview score of 6.75 gives overall 6.9. Missing some key requirements but shows potential. Recommend technical assessment and second interview before final decision."
+      }
+    }
+  ],
+
+  "simple_table_examples": {
+    "example_1_list_of_dicts": [
+      {"Product": "Laptop", "Price": 999, "Stock": 50},
+      {"Product": "Mouse", "Price": 25, "Stock": 200},
+      {"Product": "Keyboard", "Price": 75, "Stock": 150}
+    ],
+    
+    "example_2_list_of_lists": [
+      ["Alice Johnson", "alice@example.com", "Engineering"],
+      ["Bob Smith", "bob@example.com", "Marketing"],
+      ["Carol White", "carol@example.com", "Sales"]
+    ],
+    
+    "example_2_headers": ["Name", "Email", "Department"],
+    
+    "example_3_employee_data": [
+      {"ID": "E001", "Name": "John Doe", "Department": "IT", "Salary": 85000, "Hire_Date": "2020-03-15"},
+      {"ID": "E002", "Name": "Jane Smith", "Department": "HR", "Salary": 72000, "Hire_Date": "2019-07-22"},
+      {"ID": "E003", "Name": "Mike Johnson", "Department": "IT", "Salary": 95000, "Hire_Date": "2018-01-10"},
+      {"ID": "E004", "Name": "Sarah Williams", "Department": "Finance", "Salary": 88000, "Hire_Date": "2021-05-03"}
+    ]
+  },
+
+  "job_listing_intake": {
+    "Job Title": "Senior Frontend Developer",
+    "Department": "Engineering - Web Platform",
+    "Location": "San Francisco, CA (Hybrid)",
+    "Employment Type": "full_time",
+    "Seniority": "senior",
+    "Deadline": "2025-12-31",
+    "Owner Email": "hiring.manager@company.com",
+    "Requirements": [
+      "5+ years of professional frontend development experience",
+      "Expert knowledge of React and modern JavaScript (ES6+)",
+      "Strong understanding of TypeScript",
+      "Experience with state management (Redux, MobX, or similar)",
+      "Proficiency with CSS/SASS and responsive design",
+      "Experience with REST APIs and async programming",
+      "Git version control and collaborative development workflows"
+    ],
+    "Nice-to-have": [
+      "Experience with Next.js or other SSR frameworks",
+      "Knowledge of GraphQL",
+      "UI/UX design skills",
+      "Experience with testing frameworks (Jest, Cypress)",
+      "Familiarity with CI/CD pipelines",
+      "Open source contributions"
+    ],
+    "Notes": "Looking for a technical leader who can mentor junior developers and contribute to architectural decisions. Must have excellent communication skills and ability to work in cross-functional teams."
+  }
+}
