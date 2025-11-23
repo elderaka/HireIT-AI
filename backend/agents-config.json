@@ -1,40 +1,46 @@
 {
   "agents": [
     {
+      "id": "HireIT_Agent",
+      "name": "HireIT Assistant",
+      "agentId": "3524dfe3-8eea-4e1e-9e8f-b76902f601a8",
+      "environmentId": "5a170217-bc61-4c66-9b98-736ce32853a1",
+      "description": "Your Hiring AI assistant - Ask questions & get help",
+      "color": "#0f62fe"
+    },
+    {
       "id": "Job_Listing_4857jv",
       "name": "Job Listing",
       "agentId": "03a3c047-7814-49a0-b56d-79815b54d4c1",
       "environmentId": "63e260aa-aa8b-41ad-80f7-61afb0d4b3ac",
-      "description": "Creates job listing workspace with folder structure. Collects job details, creates Drive folders, and sets up tracking system.",
+      "description": "Create job workspace & folders",
       "color": "#8a3ffc"
     },
     {
-      "id": "Job_Listing_4857jv",
-      "name": "Job Listing_briefing",
-      "agentId": "4eddbde5-9644-499d-b670-5c57c2b78622",
-      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
-      "description": "Creates job listing workspace with folder structure. Collects job details, creates Drive folders, and sets up tracking system.",
-      "icon": "📋",
-      "color": "#8a3ffc"
+      "id": "Reviewer_Agent",
+      "name": "CV Reviewer",
+      "agentId": "36d85934-8ba2-48ce-9c74-bded880cadfa",
+      "environmentId": "3546f7d4-3d50-42b1-bf62-1b0e25a4563f",
+      "description": "Review & score candidate CVs",
+      "color": "#fa4d56"
     },
     {
-      "id": "HireIT_Agent",
-      "name": "HireIT",
-      "agentId": "11efeaae-3f0d-4d48-9d5f-a761ccdc4ed1",
-      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
-      "description": "Intelligent recruitment orchestrator that manages the entire hiring workflow. Delegates tasks to specialized agents for job listing, screening, interviews, and tracking.",
-      "icon": "🎯",
-      "color": "#0f62fe"
-    },
-    {
-      "id": "interviewer",
+      "id": "Interviewer_5060SD",
       "name": "Interviewer",
-      "agentId": "11efeaae-3f0d-4d48-9d5f-a761ccdc4ed1",
+      "agentId": "YOUR_INTERVIEWER_AGENT_ID",
       "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
-      "description": "Specialized interviewing agent for HireIT AI. Consumes interview transcripts, scores candidates, and generates summaries.",
-      "icon": "🎤",
+      "description": "Transcribe & evaluate interviews",
       "color": "#24a148"
+    },
+    
+    {
+      "id": "Applicant_Tracker",
+      "name": "Applicant Tracker",
+      "agentId": "c9dfcf69-1367-4704-9036-c799a4027e9c",
+      "environmentId": "0b6bb834-7598-4911-b738-87f662b898d8",
+      "description": "Manage recruitment pipeline",
+      "color": "#198038"
     }
   ],
-  "comment": "Add more agents here as you deploy them. Get agent IDs from watsonx Orchestrate UI > Agents > Channels > Embedded agent"
+  "comment": "Get agent IDs from watsonx Orchestrate UI > Agents > Channels > Embedded agent. Update the agentId values above with your actual deployed agent IDs."
 }

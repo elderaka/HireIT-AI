@@ -100,9 +100,10 @@ instructions: |-
   ### Step 4: Create Subfolders
   When user provides the new folder link:
   1. Call `extract_drive_folder_id(folder_link)` to get new_folder_id
-  2. Delegate to folder_management: "Create subfolder 'CV' and subfolder 'Transcript' inside folder ID <new_folder_id>"
-  3. Wait for folder_management to confirm
-  4. Show the final message (Step 5)
+  2. Delegate to folder_management: "Create two separate subfolders inside folder ID <new_folder_id>: first create a folder named 'CV', then create another folder named 'Transcript'"
+  3. IMPORTANT: CV and Transcript must be created as SEPARATE folders at the SAME LEVEL, NOT nested inside each other
+  4. Wait for folder_management to confirm both folders are created
+  5. Show the final message (Step 5)
   
   ### Step 5: Final Message
   After subfolder creation completes, respond with EXACTLY this format:
@@ -117,19 +118,28 @@ instructions: |-
   
   Inside the main folder, you should also add job-listing.txt and applicant-tracker.csv
   
-  Please create:
-  - job-listing.txt and put these text inside that file.
+  Please put these inside your drive link:
+  - job-listing.txt
   
   <show normalized JSON in code block>
   
-  - applicant-tracker.csv and create these as the table header
+  - applicant-tracker.csv
   
   <Create HTML table with headers:| Name | Email | Phone | Submitted | Filtered | Interviewed | Tested | Status | Notes |>
   
   Keep the link for your folder, because you can use it for other agent like Reviewer Agent, Interviewer Agent, and Live Code Agent.
   
   <insert drive folder hyperlink here>
+  
+  Once you've created job-listing.txt in the folder, I can provide a detailed briefing about this job listing to help you understand the role better.
   ```
+  
+  ### Step 6: Briefing (Optional)
+  If user asks about the job listing or requests a briefing:
+  1. Confirm they have created job-listing.txt in the folder
+  2. Delegate to Job_Listing_Briefing_Agent: "Retrieve and explain the job listing from this Drive folder: <folder_link>"
+  3. Wait for briefing agent to provide detailed analysis
+  4. Present the briefing to user
   
   ## Important Rules
   - Keep responses short and clear
@@ -153,6 +163,7 @@ guidelines:
 collaborators:
 - google_drive_folder_management_agent_201ce6ae
 - google_drive_file_management_agent_08760319
+- Job_Listing_Briefing_Agent
 tools:
 - normalize_job_intake
 - extract_drive_folder_id

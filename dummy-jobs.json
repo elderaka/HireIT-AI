@@ -1,0 +1,165 @@
+{
+  "jobs": [
+    {
+      "job_title": "Senior Full Stack Developer",
+      "department": "Engineering",
+      "location": "Remote (US)",
+      "employment_type": "Full-time",
+      "seniority": "Senior",
+      "deadline": "December 31, 2025",
+      "owner_email": "hiring@hireit.com",
+      "requirements": "5+ years of experience in full-stack development. Strong proficiency in React, Node.js, and TypeScript. Experience with cloud platforms (AWS, Azure, or GCP). Knowledge of RESTful API design and microservices architecture. Excellent problem-solving and communication skills. Bachelor's degree in Computer Science or related field.",
+      "nice_to_have": "Experience with GraphQL and Apollo. Familiarity with Docker and Kubernetes. Previous work in AI/ML projects. Open-source contributions. Leadership or mentoring experience.",
+      "notes": "Looking for a technical leader who can drive architecture decisions and mentor junior developers. Competitive salary with equity options."
+    },
+    {
+      "job_title": "Product Manager - AI Solutions",
+      "department": "Product",
+      "location": "San Francisco, CA",
+      "employment_type": "Full-time",
+      "seniority": "Mid-Level",
+      "deadline": "December 15, 2025",
+      "owner_email": "product@hireit.com",
+      "requirements": "3+ years of product management experience. Strong understanding of AI/ML technologies. Proven track record of shipping successful products. Excellent stakeholder management skills. Data-driven decision making approach. Experience with agile methodologies.",
+      "nice_to_have": "Technical background in software engineering. Experience with B2B SaaS products. MBA or advanced degree. Familiarity with recruitment technology. Strong analytical and SQL skills.",
+      "notes": "Hybrid role, 3 days in office. Working on cutting-edge AI recruitment platform. Great team culture and benefits."
+    },
+    {
+      "job_title": "DevOps Engineer",
+      "department": "Infrastructure",
+      "location": "Austin, TX",
+      "employment_type": "Full-time",
+      "seniority": "Mid-Level",
+      "deadline": "January 15, 2026",
+      "owner_email": "devops@hireit.com",
+      "requirements": "3+ years of DevOps or infrastructure experience. Strong knowledge of AWS or Azure services. Experience with Infrastructure as Code (Terraform, CloudFormation). Proficiency in CI/CD pipelines (Jenkins, GitLab CI, GitHub Actions). Container orchestration with Kubernetes. Scripting skills in Python, Bash, or PowerShell.",
+      "nice_to_have": "Experience with monitoring tools (Prometheus, Grafana, Datadog). Knowledge of security best practices. Certification in AWS or Azure. Experience with multi-cloud environments. Background in software development.",
+      "notes": "Building scalable infrastructure for high-growth startup. Opportunity to shape our DevOps practices from the ground up."
+    },
+    {
+      "job_title": "UX/UI Designer",
+      "department": "Design",
+      "location": "New York, NY",
+      "employment_type": "Full-time",
+      "seniority": "Mid-Level",
+      "deadline": "2025-12-20",
+      "owner_email": "design@hireit.com",
+      "requirements": [
+        "3+ years of UX/UI design experience",
+        "Strong portfolio demonstrating design thinking",
+        "Proficiency in Figma and Adobe Creative Suite",
+        "Experience with user research and usability testing",
+        "Understanding of responsive and accessible design principles",
+        "Excellent visual design skills"
+      ],
+      "nice_to_have": [
+        "Experience designing for AI/ML products",
+        "Motion design and animation skills",
+        "Front-end development knowledge (HTML/CSS/JavaScript)",
+        "Experience with design systems",
+        "B2B SaaS product design experience"
+      ],
+      "notes": "Hybrid position. Collaborate closely with product and engineering teams. Focus on creating intuitive experiences for complex AI workflows."
+    },
+    {
+      "job_title": "Machine Learning Engineer",
+      "department": "AI/ML",
+      "location": "Seattle, WA",
+      "employment_type": "Full-time",
+      "seniority": "Senior",
+      "deadline": "2026-01-10",
+      "owner_email": "ml@hireit.com",
+      "requirements": [
+        "5+ years of experience in machine learning",
+        "Strong programming skills in Python",
+        "Experience with ML frameworks (TensorFlow, PyTorch, scikit-learn)",
+        "Deep understanding of NLP and large language models",
+        "Experience deploying ML models to production",
+        "Master's or PhD in Computer Science, Statistics, or related field"
+      ],
+      "nice_to_have": [
+        "Experience with IBM watsonx or similar AI platforms",
+        "Publications in top-tier ML conferences",
+        "Experience with MLOps and model monitoring",
+        "Knowledge of distributed computing frameworks (Spark, Ray)",
+        "Experience in recruitment or HR tech domain"
+      ],
+      "notes": "Research-oriented role with opportunity to publish. Working on state-of-the-art CV screening and candidate matching algorithms."
+    },
+    {
+      "job_title": "Frontend Developer (React)",
+      "department": "Engineering",
+      "location": "Remote (Global)",
+      "employment_type": "Contract",
+      "seniority": "Junior",
+      "deadline": "2025-12-10",
+      "owner_email": "frontend@hireit.com",
+      "requirements": [
+        "2+ years of React development experience",
+        "Strong knowledge of JavaScript/TypeScript",
+        "Experience with modern CSS frameworks (Tailwind, Material-UI)",
+        "Understanding of RESTful APIs",
+        "Git version control proficiency",
+        "Strong attention to detail and UI polish"
+      ],
+      "nice_to_have": [
+        "Experience with Vue.js or other frameworks",
+        "Knowledge of state management (Redux, Zustand)",
+        "Testing experience (Jest, Cypress)",
+        "Experience with Next.js or Vite",
+        "Design sensibility and Figma skills"
+      ],
+      "notes": "6-month contract with potential for full-time conversion. Work with international team across time zones. Focus on building modern, responsive interfaces."
+    },
+    {
+      "job_title": "Data Analyst",
+      "department": "Analytics",
+      "location": "Chicago, IL",
+      "employment_type": "Full-time",
+      "seniority": "Mid-Level",
+      "deadline": "2025-12-28",
+      "owner_email": "analytics@hireit.com",
+      "requirements": [
+        "3+ years of data analysis experience",
+        "Strong SQL skills and database knowledge",
+        "Proficiency in Python or R for data analysis",
+        "Experience with data visualization tools (Tableau, Power BI)",
+        "Statistical analysis and A/B testing knowledge",
+        "Excellent communication and presentation skills"
+      ],
+      "nice_to_have": [
+        "Experience in HR analytics or recruitment metrics",
+        "Knowledge of machine learning basics",
+        "Experience with big data tools (Spark, Hadoop)",
+        "Background in business intelligence",
+        "Advanced degree in Statistics or related field"
+      ],
+      "notes": "Hybrid role. Drive data-driven decisions across product and business teams. Opportunity to work on interesting recruitment data problems."
+    },
+    {
+      "job_title": "Customer Success Manager",
+      "department": "Customer Success",
+      "location": "Boston, MA",
+      "employment_type": "Full-time",
+      "seniority": "Mid-Level",
+      "deadline": "2026-01-05",
+      "owner_email": "success@hireit.com",
+      "requirements": [
+        "3+ years in customer success or account management",
+        "Experience with B2B SaaS products",
+        "Strong relationship building skills",
+        "Excellent problem-solving abilities",
+        "Experience with CRM tools (Salesforce, HubSpot)",
+        "Data-driven approach to customer health metrics"
+      ],
+      "nice_to_have": [
+        "Experience in HR tech or recruitment industry",
+        "Technical background or product knowledge",
+        "Experience managing enterprise accounts",
+        "Track record of reducing churn",
+        "Customer training or onboarding experience"
+      ],
+      "notes": "Manage portfolio of mid-market and enterprise customers. Focus on adoption, retention, and expansion. Great benefits and career growth opportunities."
+    }
+  ]
+}
