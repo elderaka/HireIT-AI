@@ -1,0 +1,7 @@
+File,Name,Final Score,Decision,Worth Min,Worth Max,Unreadable,Reason
+john_doe_cv.pdf,John Doe,8.4,pass,85000,105000,False,
+jane_smith_cv.pdf,Jane Smith,7.0,borderline,70000,85000,False,
+michael_chen_cv.pdf,Michael Chen,9.2,pass,110000,135000,False,
+sarah_wilson_cv.pdf,Sarah Wilson,5.4,fail,55000,70000,False,
+corrupted_file_123.pdf,,0.0,fail,0,0,True,PDF parsing error: File appears to be corrupted or encrypted
+david_garcia_cv.pdf,David Garcia,7.6,pass,80000,95000,False,

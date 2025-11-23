@@ -1,0 +1,7 @@
+File Name,Name,Email,Experience Years,Final Score,Decision,Min Salary,Max Salary,Unreadable
+john_doe_cv.pdf,John Doe,john.doe@email.com,5,8.4,pass,85000,105000,False
+jane_smith_cv.pdf,Jane Smith,jane.smith@email.com,3.5,7.0,borderline,70000,85000,False
+michael_chen_cv.pdf,Michael Chen,michael.chen@email.com,8,9.2,pass,110000,135000,False
+sarah_wilson_cv.pdf,Sarah Wilson,sarah.wilson@email.com,2,5.4,fail,55000,70000,False
+corrupted_file_123.pdf,,,,0.0,fail,0,0,True
+david_garcia_cv.pdf,David Garcia,david.garcia@email.com,6,7.6,pass,80000,95000,False
