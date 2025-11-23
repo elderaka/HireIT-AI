@@ -1,12 +1,29 @@
 {
   "agents": [
     {
-      "id": "ask_orchestrate",
-      "name": "AskOrchestrate",
+      "id": "Job_Listing_4857jv",
+      "name": "Job Listing",
+      "agentId": "03a3c047-7814-49a0-b56d-79815b54d4c1",
+      "environmentId": "63e260aa-aa8b-41ad-80f7-61afb0d4b3ac",
+      "description": "Creates job listing workspace with folder structure. Collects job details, creates Drive folders, and sets up tracking system.",
+      "color": "#8a3ffc"
+    },
+    {
+      "id": "Job_Listing_4857jv",
+      "name": "Job Listing_briefing",
+      "agentId": "4eddbde5-9644-499d-b670-5c57c2b78622",
+      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
+      "description": "Creates job listing workspace with folder structure. Collects job details, creates Drive folders, and sets up tracking system.",
+      "icon": "📋",
+      "color": "#8a3ffc"
+    },
+    {
+      "id": "HireIT_Agent",
+      "name": "HireIT",
       "agentId": "11efeaae-3f0d-4d48-9d5f-a761ccdc4ed1",
       "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
-      "description": "General purpose AI assistant that can help with various tasks and answer questions.",
-      "icon": "🤖",
+      "description": "Intelligent recruitment orchestrator that manages the entire hiring workflow. Delegates tasks to specialized agents for job listing, screening, interviews, and tracking.",
+      "icon": "🎯",
       "color": "#0f62fe"
     },
     {

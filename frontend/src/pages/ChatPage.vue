@@ -1,98 +1,12 @@
 <template>
-  <div class="h-screen w-full flex flex-col overflow-hidden font-ibm">
+  <div class="h-screen w-full flex flex-col overflow-hidden font-ibm bg-gradient-to-br from-slate-50 to-neutral-100">
     <!-- Navbar -->
     <Navbar />
 
     <!-- Main Content -->
     <div class="flex-1 flex items-stretch overflow-hidden min-h-0">
-      <!-- History Panel -->
-      <aside class="w-64 bg-white border-r border-neutral-300 flex flex-col">
-        <div class="px-6 py-4 border-b border-neutral-300">
-          <h2 class="text-lg font-bold text-slate-900">Chat History</h2>
-          <p class="text-xs text-neutral-600 mt-1">
-            Your conversation sessions
-          </p>
-        </div>
-
-        <div class="flex-1 overflow-y-auto p-4">
-          <!-- Agent Selector -->
-          <div class="mb-4">
-            <label class="text-xs font-bold text-slate-900 mb-2 block"
-              >Select Agent</label
-            >
-            <div class="space-y-2">
-              <div
-                v-for="agent in agents"
-                :key="agent.id"
-                @click="switchToAgent(agent)"
-                :class="[
-                  'p-3 rounded-xl cursor-pointer transition-all border',
-                  currentAgent?.id === agent.id
-                    ? 'bg-sky-50 border-sky-300'
-                    : 'bg-white border-neutral-200 hover:border-neutral-300',
-                ]"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="text-2xl">{{ agent.icon }}</span>
-                  <div class="flex-1 min-w-0">
-                    <div class="font-bold text-xs text-slate-900 truncate">
-                      {{ agent.name }}
-                    </div>
-                    <div
-                      v-if="currentAgent?.id === agent.id"
-                      class="text-xs text-green-600 font-bold"
-                    >
-                      ● Active
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Conversations -->
-          <div>
-            <label class="text-xs font-bold text-slate-900 mb-2 block"
-              >Recent Chats</label
-            >
-            <div
-              v-if="conversations.length === 0"
-              class="text-xs text-neutral-500 text-center py-8"
-            >
-              <div class="text-3xl mb-2">💬</div>
-              <p>Chat history will appear here</p>
-            </div>
-            <div v-else class="space-y-2">
-              <div
-                v-for="conv in conversations"
-                :key="conv.id"
-                class="p-2 rounded-lg bg-neutral-50 hover:bg-neutral-100 cursor-pointer transition-colors border border-neutral-200"
-              >
-                <div class="flex items-start gap-2">
-                  <span class="text-lg">{{ conv.agentIcon }}</span>
-                  <div class="flex-1 min-w-0">
-                    <div class="text-xs font-semibold text-slate-900 truncate">
-                      {{ conv.agentName }} - {{ conv.messageCount }} messages
-                    </div>
-                    <div class="text-xs text-neutral-500">
-                      {{ formatTime(conv.createdAt) }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="px-4 py-3 border-t border-neutral-300 bg-neutral-100">
-          <div class="text-xs text-neutral-600">
-            <strong>Tip:</strong> Your current session is automatically saved
-          </div>
-        </div>
-      </aside>
-
       <!-- Watsonx Chat Container -->
-      <div id="watsonx-chat-root" class="flex-1 relative bg-white"></div>
+      <div id="watsonx-chat-root" class="flex-1 relative"></div>
 
       <!-- Right Sidebar -->
       <aside
@@ -142,113 +56,47 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import Navbar from "@/components/Navbar.vue";
 
 const rightSidebarOpen = ref(true);
-const agents = ref([]);
-const currentAgent = ref(null);
-const conversations = ref([]);
-const currentConversationId = ref(null);
 let watsonxInstance = null;
 
-// Load conversations from backend
-const loadConversations = async () => {
-  try {
-    const response = await fetch("http://localhost:3001/api/conversations");
-    const data = await response.json();
-    conversations.value = data.conversations;
-  } catch (error) {
-    console.error("Failed to load conversations:", error);
-  }
-};
-
-// Create new conversation with backend
-const createConversation = async (agentId, agentName, agentIcon) => {
-  try {
-    const response = await fetch("http://localhost:3001/api/conversations", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ agentId }),
-    });
-
-    const data = await response.json();
-    currentConversationId.value = data.conversationId;
-
-    // Reload conversations list
-    await loadConversations();
-
-    return data.conversationId;
-  } catch (error) {
-    console.error("Failed to create conversation:", error);
-    return null;
-  }
-};
-
-// Format timestamp for display
-const formatTime = (timestamp) => {
-  const date = new Date(timestamp);
-  const now = new Date();
-  const diff = now - date;
-
-  // Less than 1 minute
-  if (diff < 60000) return "Just now";
-
-  // Less than 1 hour
-  if (diff < 3600000) {
-    const mins = Math.floor(diff / 60000);
-    return `${mins}m ago`;
-  }
-
-  // Less than 1 day
-  if (diff < 86400000) {
-    const hours = Math.floor(diff / 3600000);
-    return `${hours}h ago`;
-  }
-
-  // Show date
-  return date.toLocaleDateString();
-};
-
-// Fetch agents from backend
-const loadAgents = async () => {
-  try {
-    const response = await fetch("http://localhost:3001/api/agents");
-    const data = await response.json();
-    agents.value = data.agents;
-
-    // Auto-select first agent
-    if (agents.value.length > 0) {
-      switchToAgent(agents.value[0]);
-    }
-  } catch (error) {
-    console.error("Failed to load agents:", error);
-  }
-};
-
-// Initialize watsonx chat with specific agent
-const initWatsonxChat = async (agent) => {
+// Initialize watsonx chat with HireIT orchestrator agent
+const initWatsonxChat = async () => {
+  console.log("Initializing HireIT Agent...");
+  
   // Wait for DOM to be ready
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
   const rootElement = document.getElementById("watsonx-chat-root");
   if (!rootElement) {
     console.error("Root element not found");
     return;
   }
+  
+  // Ensure root element is clean
+  rootElement.innerHTML = "";
 
-  // Destroy existing instance if any
-  if (watsonxInstance) {
-    try {
-      if (typeof watsonxInstance.destroy === "function") {
-        watsonxInstance.destroy();
-      }
-      // Clear the root element
-      rootElement.innerHTML = "";
-    } catch (e) {
-      console.log("Clearing previous instance:", e.message);
+  // Get HireIT agent configuration from backend
+  let agentConfig;
+  try {
+    const response = await fetch("http://localhost:3001/api/agents");
+    const data = await response.json();
+    
+    // Find the HireIT agent (formerly AskOrchestrate)
+    agentConfig = data.agents.find(
+      (a) => a.id === "HireIT_Agent" || a.name === "HireIT"
+    );
+    
+    if (!agentConfig) {
+      console.error("HireIT agent not found in configuration");
+      return;
     }
+    
+    console.log("HireIT agent loaded:", agentConfig);
+  } catch (error) {
+    console.error("Failed to load agent configuration:", error);
+    return;
   }
 
-  // Configure for new agent - use custom mode with customElement
+  // Configure watsonx with HireIT orchestrator
   window.wxOConfiguration = {
     orchestrationID:
       "69234d49cb514b0b9cf983c7a47f2f14_ee108010-e155-409a-a2b5-2dfe15fb2376",
@@ -262,24 +110,25 @@ const initWatsonxChat = async (agent) => {
       showOrchestrateHeader: true,
     },
     header: {
-      showResetButton: false,
-      showAiDisclaimer: false,
+      showResetButton: true,
+      showAiDisclaimer: true,
     },
     chatOptions: {
-      agentId: agent.agentId,
-      agentEnvironmentId: agent.environmentId,
+      agentId: agentConfig.agentId,
+      agentEnvironmentId: agentConfig.environmentId,
     },
     style: {
-      headerColor: "#000000",
-      userMessageBackgroundColor: "#e0e0e0",
+      headerColor: "#0f62fe",
+      userMessageBackgroundColor: "#0f62fe",
       primaryColor: "#0f62fe",
-      showBackgroundGradient: false,
+      showBackgroundGradient: true,
     },
   };
 
-  // Load/reload watsonx
+  // Load watsonx script
   if (window.wxoLoader && typeof window.wxoLoader.init === "function") {
     try {
+      console.log("Initializing existing wxoLoader...");
       watsonxInstance = window.wxoLoader.init();
     } catch (e) {
       console.error("Error initializing wxoLoader:", e);
@@ -293,13 +142,16 @@ const initWatsonxChat = async (agent) => {
       existingScript.remove();
     }
 
+    console.log("Loading wxoLoader script...");
     const script = document.createElement("script");
     script.src =
       "https://us-south.watson-orchestrate.cloud.ibm.com/wxochat/wxoLoader.js?embed=true";
     script.onload = () => {
+      console.log("wxoLoader script loaded");
       if (window.wxoLoader && typeof window.wxoLoader.init === "function") {
         try {
           watsonxInstance = window.wxoLoader.init();
+          console.log("HireIT chat initialized successfully");
         } catch (e) {
           console.error("Error initializing wxoLoader after load:", e);
         }
@@ -312,30 +164,25 @@ const initWatsonxChat = async (agent) => {
   }
 };
 
-// Switch to different agent
-const switchToAgent = async (agent) => {
-  if (currentAgent.value?.id === agent.id) {
-    console.log("Agent already active");
-    return;
-  }
-
-  currentAgent.value = agent;
-  console.log("Switching to agent:", agent.name);
-
-  // Create new conversation with backend
-  await createConversation(agent.id, agent.name, agent.icon);
-
-  await initWatsonxChat(agent);
-};
-
 onMounted(async () => {
-  loadConversations();
-  await loadAgents();
+  await initWatsonxChat();
 });
 
 onBeforeUnmount(() => {
-  if (watsonxInstance && watsonxInstance.destroy) {
-    watsonxInstance.destroy();
+  if (watsonxInstance) {
+    try {
+      if (typeof watsonxInstance.destroy === "function") {
+        watsonxInstance.destroy();
+      }
+    } catch (e) {
+      console.error("Error during unmount cleanup:", e);
+    }
+    watsonxInstance = null;
+  }
+  
+  // Clean up global configuration
+  if (window.wxOConfiguration) {
+    delete window.wxOConfiguration;
   }
 });
 </script>

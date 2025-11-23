@@ -61,6 +61,12 @@ def get_folders(
     """
 
     client = get_google_client()
+    
+    if isinstance(limit, str):
+        limit = int(limit) if limit.isdigit() else 20
+    
+    if next_page_token in ("null", "None", ""):
+        next_page_token = None
 
     if folder_name:
         query = f"mimeType='application/vnd.google-apps.folder' and trashed = false and name = '{folder_name}'"

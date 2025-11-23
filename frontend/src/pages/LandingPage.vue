@@ -13,12 +13,12 @@
       <b
         class="justify-start text-White text-3xl md:text-6xl font-bold"
       >
-        Smarter Hiring Starts Here
+        Your AI Recruitment Orchestrator
       </b>
       <i
         class="justify-start text-White text-lg md:text-3xl font-bold italic "
       >
-        AI-powered hiring, fully under your control.
+        One intelligent agent that coordinates your entire hiring workflow.
       </i>
     </div>
     <router-link
