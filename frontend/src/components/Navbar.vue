@@ -6,10 +6,10 @@
         to="/" 
         class="flex items-center gap-3 group"
       >
-        <span class="text-3xl group-hover:scale-110 transition-transform">🎯</span>
+        <img src="/layer_2.png" alt="HireIT AI" class="w-10 h-10 group-hover:scale-110 transition-transform" />
         <div class="flex flex-col">
           <span class="text-2xl font-bold text-white group-hover:text-sky-400 transition-colors font-['IBM_Plex_Sans']">
-            HireIT
+            HireIT AI
           </span>
           <span class="text-xs text-white -mt-1 font-['IBM_Plex_Sans']">
             AI Recruitment Orchestrator

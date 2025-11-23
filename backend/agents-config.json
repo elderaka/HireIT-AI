@@ -27,8 +27,8 @@
     {
       "id": "Interviewer_5060SD",
       "name": "Interviewer",
-      "agentId": "YOUR_INTERVIEWER_AGENT_ID",
-      "environmentId": "18df8abf-1770-44e5-b78e-8953e2050a92",
+      "agentId": "ab29f28d-97de-415f-8eb8-df8274743cc7",
+      "environmentId": "2abc288d-b342-4bc0-8170-0fa0d3b6fa8f",
       "description": "Transcribe & evaluate interviews",
       "color": "#24a148"
     },
