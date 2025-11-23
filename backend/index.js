@@ -1,10 +1,17 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import watsonxClient from "./watsonx-client.js";
 import multiAgentClient from "./multi-agent-client.js";
 
-dotenv.config();
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from parent directory
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const app = express();
 app.use(cors());
@@ -225,9 +232,245 @@ app.delete("/api/conversations/:conversationId", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+// ========== ORCHESTRATE API ENDPOINTS ==========
+
+// Get IAM token for Orchestrate API calls
+async function getOrchestrateToken() {
+  const apiKey = process.env.WATSONX_API_KEY;
+  if (!apiKey) {
+    throw new Error("WATSONX_API_KEY not configured");
+  }
+
+  const response = await fetch("https://iam.cloud.ibm.com/identity/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "application/json"
+    },
+    body: `grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=${apiKey}`
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to get IAM token: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.access_token;
+}
+
+// Get all available agents from Orchestrate
+app.get("/api/orchestrate/agents", async (req, res) => {
+  try {
+    const token = await getOrchestrateToken();
+    const serviceUrl = process.env.SERVICE_INSTANCE_URL;
+    
+    if (!serviceUrl) {
+      return res.status(500).json({ error: "SERVICE_INSTANCE_URL not configured" });
+    }
+
+    const { query, ids, names, limit, offset, sort } = req.query;
+    
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (query) params.append('query', query);
+    if (ids) params.append('ids', ids);
+    if (names) params.append('names', names);
+    if (limit) params.append('limit', limit);
+    if (offset) params.append('offset', offset);
+    if (sort) params.append('sort', sort);
+
+    // The SERVICE_INSTANCE_URL already includes the full path
+    const url = `${serviceUrl}/v2/orchestrate/agents${params.toString() ? '?' + params.toString() : ''}`;
+    
+    console.log('Fetching agents from:', url);
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch agents: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching Orchestrate agents:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get all message threads
+app.get("/api/orchestrate/threads", async (req, res) => {
+  try {
+    const token = await getOrchestrateToken();
+    const serviceUrl = process.env.SERVICE_INSTANCE_URL;
+    
+    if (!serviceUrl) {
+      return res.status(500).json({ error: "SERVICE_INSTANCE_URL not configured" });
+    }
+
+    const { agent_id, limit, offset } = req.query;
+    
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (agent_id) params.append('agent_id', agent_id);
+    if (limit) params.append('limit', limit);
+    if (offset) params.append('offset', offset);
+
+    const url = `${serviceUrl}/v1/threads${params.toString() ? '?' + params.toString() : ''}`;
+    
+    console.log('Fetching threads from:', url);
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch threads: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching threads:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get specific thread by ID
+app.get("/api/orchestrate/threads/:threadId", async (req, res) => {
+  try {
+    const token = await getOrchestrateToken();
+    const serviceUrl = process.env.SERVICE_INSTANCE_URL;
+    const { threadId } = req.params;
+    
+    if (!serviceUrl) {
+      return res.status(500).json({ error: "SERVICE_INSTANCE_URL not configured" });
+    }
+
+    const url = `${serviceUrl}/v1/threads/${threadId}`;
+    
+    console.log('Fetching thread from:', url);
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch thread: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching thread:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get messages in a thread
+app.get("/api/orchestrate/threads/:threadId/messages", async (req, res) => {
+  try {
+    const token = await getOrchestrateToken();
+    const serviceUrl = process.env.SERVICE_INSTANCE_URL;
+    const { threadId } = req.params;
+    const { limit, offset } = req.query;
+    
+    if (!serviceUrl) {
+      return res.status(500).json({ error: "SERVICE_INSTANCE_URL not configured" });
+    }
+
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (limit) params.append('limit', limit);
+    if (offset) params.append('offset', offset);
+
+    const url = `${serviceUrl}/v1/threads/${threadId}/messages${params.toString() ? '?' + params.toString() : ''}`;
+    
+    console.log('Fetching messages from:', url);
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch messages: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get specific message in a thread
+app.get("/api/orchestrate/threads/:threadId/messages/:messageId", async (req, res) => {
+  try {
+    const token = await getOrchestrateToken();
+    const serviceUrl = process.env.SERVICE_INSTANCE_URL;
+    const { threadId, messageId } = req.params;
+    
+    if (!serviceUrl) {
+      return res.status(500).json({ error: "SERVICE_INSTANCE_URL not configured" });
+    }
+
+    const url = `${serviceUrl}/v1/threads/${threadId}/messages/${messageId}`;
+    
+    console.log('Fetching message from:', url);
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch message: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching message:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+const PORT = 3001;
 app.listen(PORT, () => {
   console.log("Backend running on http://localhost:" + PORT);
   console.log("\nWatsonx Orchestrate Integration Ready!");
   console.log("Make sure to configure your .env file with IBM Cloud credentials.");
+  console.log("\nAvailable Orchestrate API endpoints:");
+  console.log("  GET  /api/orchestrate/agents - List all agents");
+  console.log("  GET  /api/orchestrate/threads - List all threads");
+  console.log("  GET  /api/orchestrate/threads/:threadId - Get thread details");
+  console.log("  GET  /api/orchestrate/threads/:threadId/messages - List thread messages");
+  console.log("  GET  /api/orchestrate/threads/:threadId/messages/:messageId - Get specific message");
 });
