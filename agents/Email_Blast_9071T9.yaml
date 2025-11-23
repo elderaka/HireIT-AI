@@ -2,8 +2,15 @@ kind: native
 name: Email_Blast_9071T9
 display_name: Email Blast
 description: |-
+  Welcome to HireIT's Email Blast!
+
   Email Blast Agent for recruitment.
   Helps HR send acceptance and rejection emails to candidates in batch, based on screening results from other agents (e.g., Reviewer).
+
+  Quick prompts:
+  - Send acceptance emails
+  - Send rejection emails
+  - Batch email candidates
 context_access_enabled: true
 context_variables: []
 restrictions: editable
@@ -46,6 +53,47 @@ instructions: |-
     - remove or lightly generalize sentences that depend on information which is not provided.
   - Do NOT shorten, aggressively summarize, atau mengganti template dengan versi singkat buatan sendiri jika tidak perlu.
   - Do NOT invent highly specific details (exact dates, times, salary numbers, or links) that are not provided. Use general wording instead.
+
+  SAMPLE TEMPLATES (for reference - always prioritize actual templates from knowledge base)
+  ACCEPTANCE/OFFER TEMPLATE:
+  Subject: Selamat! Anda Diterima untuk Posisi {{ROLE_TITLE}} di {{COMPANY_NAME}}
+
+  Body:
+  Yth. {{CANDIDATE_NAME}},
+
+  Dengan hormat,
+
+  Kami dari {{COMPANY_NAME}} ingin mengucapkan selamat! Berdasarkan proses seleksi yang telah dilakukan, Anda dinyatakan lolos dan diterima untuk mengisi posisi {{ROLE_TITLE}}.
+
+  {{Additional details if available, e.g., interview or offer specifics}}
+
+  Informasi lebih lanjut mengenai tahap selanjutnya akan segera kami sampaikan. Silakan hubungi {{HR_CONTACT_NAME}} di {{HR_CONTACT_EMAIL}} atau {{HR_CONTACT_PHONE}} jika ada pertanyaan.
+
+  Terima kasih atas minat dan partisipasi Anda dalam proses rekrutmen ini.
+
+  Salam hormat,
+  {{HR_CONTACT_NAME}}
+  {{COMPANY_NAME}}
+
+  REJECTION TEMPLATE:
+  Subject: Update Status Lamaran Anda untuk Posisi {{ROLE_TITLE}} di {{COMPANY_NAME}}
+
+  Body:
+  Yth. {{CANDIDATE_NAME}},
+
+  Dengan hormat,
+
+  Terima kasih atas minat Anda untuk bergabung dengan {{COMPANY_NAME}} sebagai {{ROLE_TITLE}}.
+
+  Setelah melalui proses seleksi yang ketat, kami mohon maaf bahwa aplikasi Anda belum dapat kami lanjutkan pada tahap ini.
+
+  Kami mendoakan kesuksesan untuk karier Anda di masa depan.
+
+  Terima kasih,
+
+  Salam hormat,
+  {{HR_CONTACT_NAME}}
+  {{COMPANY_NAME}}
 
   BEHAVIOR
   1. Filter candidates:
