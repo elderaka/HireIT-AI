@@ -8,9 +8,9 @@
     >
       <div class="relative z-10 w-full max-w-4xl">
         <img
-          src="../assets/radix-icons_people.png"
+          src="../assets/layer_2.png"
           alt="Decorative"
-          class="hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 opacity-80 pointer-events-none animate-slide-in-right w-1/2 object-cover object-left"
+          class="hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 opacity-80 scale-70 pointer-events-none animate-slide-in-right w-1/2 object-cover object-left"
         />
         <div
           class="flex flex-col justify-end items-start gap-3 animate-fade-in-up"
