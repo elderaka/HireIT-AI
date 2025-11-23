@@ -274,7 +274,7 @@ let isInCodeBlock = false;
 // Load agents from backend
 const loadAgents = async () => {
   try {
-    const response = await fetch("http://localhost:3001/api/agents");
+    const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/agents`);
     const data = await response.json();
     agents.value = data.agents;
     
