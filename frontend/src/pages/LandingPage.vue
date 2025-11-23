@@ -6,12 +6,13 @@
     <section
       class="h-screen w-full flex flex-col justify-center items-start gap-3 px-6 md:gap-6 md:px-20 bg-gradient-to-b from-sky-50 via-blue-600/80 to-slate-900 snap-start relative"
     >
+      <img
+        src="/layer_2.png"
+        alt="Decorative"
+        style="z-index: 0;"
+        class="hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 scale-70 pointer-events-none animate-slide-in-right w-1/2 object-cover object-left"
+      />
       <div class="relative z-10 w-full max-w-4xl">
-        <img
-          src="../assets/layer_2.png"
-          alt="Decorative"
-          class="hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 opacity-80 scale-70 pointer-events-none animate-slide-in-right w-1/2 object-cover object-left"
-        />
         <div
           class="flex flex-col justify-end items-start gap-3 animate-fade-in-up"
         >
@@ -39,7 +40,7 @@
           <img
             class="w-10 h-10 relative max-h-full"
             alt="Arrow Icon"
-            src="../assets/mi_arrow-left.png"
+            src="/mi_arrow-left.png"
           />
         </router-link>
       </div>
@@ -215,7 +216,7 @@
                 <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/ic_round-auto-mode.png"
+                  src="/ic_round-auto-mode.png"
                 />
               </div>
               <div
@@ -241,7 +242,7 @@
                 <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/streamline-ultimate_human-resources-search-men.svg"
+                  src="/streamline-ultimate_human-resources-search-men.svg"
                 />
               </div>
               <div
@@ -264,7 +265,7 @@
           <div
             class="self-stretch px-10 py-6 backdrop-blur-xl bg-white/5 rounded-3xl inline-flex justify-start items-start gap-6 border border-white/10 shadow-lg hover:bg-white/10 transition-all"
           >
-            <img class="w-72 h-12" src="../assets/IBM_watsonx_logo.svg.png" />
+            <img class="w-72 h-12" src="/IBM_watsonx_logo.svg.png" />
             <div
               class="flex-1 inline-flex flex-col justify-start items-start gap-3"
             >
@@ -324,7 +325,7 @@
             <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/hugeicons_ai-brain-03.svg"
+                  src="/hugeicons_ai-brain-03.svg"
                 />
           </div>
           <div class="flex-1 flex flex-col justify-start items-start gap-6">
@@ -349,7 +350,7 @@
             <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/streamline-ultimate_user-network.svg"
+                  src="/streamline-ultimate_user-network.svg"
                 />
           </div>
           <div class="flex-1 flex flex-col justify-start items-start gap-6">
@@ -374,7 +375,7 @@
             <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/streamline-ultimate_human-resources-search-men.svg"
+                  src="/streamline-ultimate_human-resources-search-men.svg"
                 />
           </div>
           <div class="flex-1 flex flex-col justify-start items-start gap-6">
@@ -759,7 +760,7 @@
                 <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/union.svg"
+                  src="/union.svg"
                 />
               </div>
               <div
@@ -774,7 +775,7 @@
               <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/union.svg"
+                  src="/union.svg"
                 />
               <div
                 class="self-stretch justify-start text-White text-2xl font-normal font-['IBM_Plex_Sans']"
@@ -788,7 +789,7 @@
               <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/union.svg"
+                  src="/union.svg"
                 />
               <div
                 class="self-stretch justify-start text-White text-2xl font-normal font-['IBM_Plex_Sans']"
@@ -802,7 +803,7 @@
               <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/union.svg"
+                  src="/union.svg"
                 />
               <div
                 class="self-stretch justify-start text-White text-2xl font-normal font-['IBM_Plex_Sans']"
@@ -816,7 +817,7 @@
               <img
                   class="relative max-h-full"
                   alt="Arrow Icon"
-                  src="../assets/union.svg"
+                  src="/union.svg"
                 />
               <div
                 class="self-stretch justify-start text-White text-2xl font-normal font-['IBM_Plex_Sans']"
@@ -855,7 +856,7 @@
               <img
                 class="w-10 h-10 relative max-h-full"
                 alt="Arrow Icon"
-                src="../assets/mi_arrow-left.png"
+                src="/mi_arrow-left.png"
               />
             </router-link>
           </div>
@@ -866,6 +867,10 @@
 </template>
 
 <script setup></script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap");
+</style>
 
 <style scoped>
 /* Animation keyframes */
@@ -903,8 +908,6 @@
 .animation-delay-300 {
   animation-delay: 0.3s;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap");
 
 .font-ibm-plex-sans {
   font-family: "IBM Plex Sans", sans-serif;
