@@ -4,8 +4,8 @@ import json
 import requests
 from ibm_watsonx_orchestrate.agent_builder.tools import tool, ToolPermission
 
-STT_URL = os.getenv("https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/c6178b34-fc62-4527-91cf-4f498faff0e4","https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/c6178b34-fc62-4527-91cf-4f498faff0e4/v1/recognize")
-STT_API_KEY = os.getenv("***REMOVED***", "***REMOVED***")
+STT_URL = os.getenv("-","-")
+STT_API_KEY = os.getenv("-", "-")
 STT_DEFAULT_LANGUAGE = "en-US"  # atau "id-ID"
 
 
