@@ -340,10 +340,9 @@ const initChatWithAgent = async (agent) => {
 
   // Configure watsonx with selected agent
   window.wxOConfiguration = {
-    orchestrationID:
-      "69234d49cb514b0b9cf983c7a47f2f14_ee108010-e155-409a-a2b5-2dfe15fb2376",
+    orchestrationID: import.meta.env.VITE_WATSONX_ORCHESTRATION_ID,
     hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
-    crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/69234d49cb514b0b9cf983c7a47f2f14:ee108010-e155-409a-a2b5-2dfe15fb2376::",
+    crn: import.meta.env.VITE_WATSONX_CRN,
     deploymentPlatform: "ibmcloud",
     showLauncher: false,
     layout: {
