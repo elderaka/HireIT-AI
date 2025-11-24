@@ -4,7 +4,6 @@ import json
 import requests
 from ibm_watsonx_orchestrate.agent_builder.tools import tool, ToolPermission
 
-# Load from environment variables - NEVER hardcode API keys!
 STT_URL = os.getenv("IBM_STT_URL", "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/c6178b34-fc62-4527-91cf-4f498faff0e4/v1/recognize")
 STT_API_KEY = os.getenv("IBM_STT_API_KEY")
 STT_DEFAULT_LANGUAGE = "en-US"  # atau "id-ID"
